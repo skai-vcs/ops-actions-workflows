@@ -1,0 +1,12 @@
+name: Common reusable workflow
+
+run-name: Workflow for ${{ github.event.repository.name }} ${{ github.event_name }} event
+
+on:
+  workflow_call:
+
+jobs:
+  RunGitNamingChecks:
+    uses: skai-vcs/ops-actions-components/.github/workflows/global_git_tests.yml@main
+    with:
+      runs-on: ${{ vars.BC_RUNS_ON || 'ubuntu-latest' }}
