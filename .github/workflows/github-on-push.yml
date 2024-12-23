@@ -1,0 +1,18 @@
+name: Common reusable workflow
+
+run-name: Workflow for ${{ github.event.repository.name }} ${{ github.event_name }} event
+
+on:
+  workflow_call:
+
+jobs:        
+  CheckUserMembershipJob:
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event.pull_request.base.ref == 'staging' && github.event.pull_request.merged == true) ||
+      (github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true)
+    uses: skai-vcs/ops-actions-components/.github/workflows/utility_terraform_apply.yml@main
+    secrets: inherit
+    with:
+      runs-on: ${{ vars.BC_RUNS_ON || 'ubuntu-latest' }}
+      terraform-path: './terraform'
