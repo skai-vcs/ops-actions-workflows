@@ -16,3 +16,4 @@ jobs:
     with:
       runs-on: ${{ vars.BC_RUNS_ON || 'ubuntu-latest' }}
       terraform-path: './terraform'
+      aws-account-id: ${{ vars.BC_AWS_ACCOUNT_NONPROD }}
